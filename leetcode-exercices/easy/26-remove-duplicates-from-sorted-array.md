@@ -1,4 +1,4 @@
-# Remove Duplicates from Sorted Array
+# 26. Remove Duplicates from Sorted Array
 
 ## Solution
 
@@ -8,18 +8,16 @@
  * @return {number}
  */
 var removeDuplicates = function (nums) {
-  if (nums.length === 0) return 0;
+  let leftPointer = 0;
 
-  let k = 1;
-
-  for (let i = 1; i < nums.length; i++) {
-    if (nums[i] !== nums[i - 1]) {
-      nums[k] = nums[i];
-      k++;
+  for (let rightPointer = 1; rightPointer < nums.length; rightPointer++) {
+    if (nums[leftPointer] !== nums[rightPointer]) {
+      leftPointer++;
+      nums[leftPointer] = nums[rightPointer];
     }
   }
 
-  return k;
+  return leftPointer + 1;
 };
 ```
 
