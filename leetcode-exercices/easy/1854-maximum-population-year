@@ -1,0 +1,48 @@
+# 1854. Maximum Population Year
+
+## Solution
+
+I used Sweep Line Algorithm to solve this:
+
+```javascript
+/**
+ * @param {number[][]} logs
+ * @return {number}
+ */
+var maximumPopulation = function (logs) {
+  const START_YEAR = 1950;
+  const END_YEAR = 2050;
+  const rangeOfYears = END_YEAR - START_YEAR + 1;
+
+  const populationChange = new Array(rangeOfYears).fill(0);
+
+  for (const [birth, death] of logs) {
+    const birthIndex = birth - 1950;
+    const deathIndex = death - 1950;
+    populationChange[birthIndex]++;
+    populationChange[deathIndex]--;
+  }
+
+  let maxYear = 0;
+
+  for (let i = 1; i < rangeOfYears; i++) {
+    populationChange[i] += populationChange[i - 1];
+
+    if (populationChange[i] > populationChange[maxYear]) maxYear = i;
+  }
+
+  return 1950 + maxYear;
+};
+```
+
+## 📝 LeetCode Solution
+
+🔗 [View on LeetCode](https://leetcode.com/problems/maximum-population-year/solutions/6387235/best-easy-solution-on-sweep-line-algorit-mctw/)
+
+## 📈 Complexity Analysis
+
+- **Time Complexity:** $ O(n) $ <br>
+  → We iterate through `logs` only once and another loop with fixed size of 101.
+  <br>
+- **Space Complexity:** $O(1)$ <br>
+  → The populationChange array has a fixed size of 101
