@@ -1,6 +1,6 @@
 # 20. Valid Parentheses
 
-## Solution
+## Solution - Stack
 
 ```javascript
 /**
