@@ -8,17 +8,16 @@
  * @return {boolean}
  */
 var isPalindrome = function (x) {
-  const stringX = x.toString();
+  const xString = x.toString();
   let left = 0;
-  let right = Number(stringX.length) - 1;
+  let right = xString.length - 1;
 
-  while (left < right) {
-    const rightString = stringX[right].toString();
-    const leftString = stringX[left].toString();
-    if (rightString != leftString) return false;
+  while (left <= right) {
+    if (xString[left] !== xString[right]) return false;
     left++;
     right--;
   }
+
   return true;
 };
 ```
