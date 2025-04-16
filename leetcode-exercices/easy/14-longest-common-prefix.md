@@ -1,6 +1,6 @@
 # 14. Longest Common Prefix
 
-## Solution
+## Solution 1
 
 ```javascript
 /**
@@ -31,4 +31,7 @@ var longestCommonPrefix = function (strs) {
   <br>
 - **Space Complexity:** $O(1)$ <br>
   → sort() is in-place javascript, no new array created
-  →
+
+## Solution 2
+
+TODO: try to resolve with O(n × m) time complexity and O(1) space complexity
