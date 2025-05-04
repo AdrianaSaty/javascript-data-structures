@@ -9,42 +9,25 @@
  * @return {boolean}
  */
 var canChange = function (start, target) {
-  const length = start.length;
   let pointerStart = 0;
   let pointerTarget = 0;
 
-  while (pointerStart < length || pointerTarget < length) {
-    while (pointerStart < length && start[pointerStart] === "_") {
+  while (pointerStart < start.length || pointerTarget < target.length) {
+    while (start[pointerStart] === "_") {
       pointerStart++;
     }
-
-    while (pointerTarget < length && target[pointerTarget] === "_") {
+    while (target[pointerTarget] === "_") {
       pointerTarget++;
     }
-
-    if (pointerStart === length && pointerTarget === length) {
-      return true;
-    }
-
-    if (pointerStart === length || pointerTarget === length) {
+    if (start[pointerStart] != target[pointerTarget]) return false;
+    if (start[pointerStart] === "L" && pointerStart < pointerTarget)
       return false;
-    }
-
-    if (start[pointerStart] !== target[pointerTarget]) {
+    if (start[pointerStart] === "R" && pointerStart > pointerTarget)
       return false;
-    }
-
-    if (start[pointerStart] === "L" && pointerStart < pointerTarget) {
-      return false;
-    }
-
-    if (start[pointerStart] === "R" && pointerStart > pointerTarget) {
-      return false;
-    }
-
     pointerStart++;
     pointerTarget++;
   }
+
   return true;
 };
 ```
