@@ -12,38 +12,24 @@
  */
 var floodFill = function (image, sr, sc, color) {
   const initialColor = image[sr][sc];
+  const imageRow = image.length;
+  const imageCol = image[0].length;
+
   if (initialColor === color) return image;
 
-  const imageRowLength = image.length;
-  const imageColLength = image[0].length;
-
-  const directions = [
-    [-1, 0],
-    [0, -1],
-    [0, 1],
-    [1, 0],
-  ];
-
   const dfs = (row, col) => {
-    if (
-      row >= imageRowLength ||
-      row < 0 ||
-      col >= imageColLength ||
-      col < 0 ||
-      image[row][col] !== initialColor
-    )
-      return;
+    if (row < 0 || row >= imageRow || col < 0 || col >= imageCol) return;
+    if (image[row][col] !== initialColor) return;
 
     image[row][col] = color;
 
-    for (const [dx, dy] of directions) {
-      const nextRow = row + dx;
-      const newCol = col + dy;
-      dfs(nextRow, newCol);
-    }
+    dfs(row + 1, col);
+    dfs(row - 1, col);
+    dfs(row, col + 1);
+    dfs(row, col - 1);
   };
 
-  dfs(sr, sc, color);
+  dfs(sr, sc);
 
   return image;
 };
