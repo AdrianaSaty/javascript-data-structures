@@ -23,15 +23,18 @@ var maximumPopulation = function (logs) {
     populationChange[deathIndex]--;
   }
 
-  let maxYear = 0;
+  let maxYearIndex = 0;
 
   for (let i = 1; i < rangeOfYears; i++) {
     populationChange[i] += populationChange[i - 1];
 
-    if (populationChange[i] > populationChange[maxYear]) maxYear = i;
+    if (populationChange[i] > populationChange[maxYearIndex]) {
+      maxYearIndex = i;
+    }
   }
 
-  return 1950 + maxYear;
+  const maxYear = maxYearIndex + START_YEAR;
+  return maxYear;
 };
 ```
 
