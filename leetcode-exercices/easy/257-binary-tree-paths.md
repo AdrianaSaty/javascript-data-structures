@@ -1,5 +1,7 @@
 # 257. Binary Tree Paths
 
+#binary-tree #dfs
+
 ## Solution
 
 It performs a depth-first search (DFS) starting from the root, carrying along the current path as a string.  
