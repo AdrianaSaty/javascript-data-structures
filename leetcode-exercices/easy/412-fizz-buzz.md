@@ -1,5 +1,7 @@
 # 412. Fizz Buzz
 
+#for-beginners
+
 ## Solution
 
 ```javascript
@@ -8,20 +10,20 @@
  * @return {string[]}
  */
 var fizzBuzz = function (n) {
-  let resultArray = [];
+  let resultArray = []
   for (let i = 1; i <= n; i++) {
     if (i % 3 === 0 && i % 5 === 0) {
-      resultArray.push("FizzBuzz");
+      resultArray.push("FizzBuzz")
     } else if (i % 3 === 0) {
-      resultArray.push("Fizz");
+      resultArray.push("Fizz")
     } else if (i % 5 === 0) {
-      resultArray.push("Buzz");
+      resultArray.push("Buzz")
     } else {
-      resultArray.push(i.toString());
+      resultArray.push(i.toString())
     }
   }
-  return resultArray;
-};
+  return resultArray
+}
 ```
 
 ## 📝 LeetCode Solution
