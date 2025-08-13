@@ -1,49 +1,49 @@
 # 228. Summary Ranges
 
+#two-pointers
+
 ## Solution 1 (Single loop)
 
 The function summaryRanges(nums) summarizes a sorted array of unique integers into a list of string ranges.
 
-How it works: 1. It uses a temporary array currentRangeArray to track a range. 2. It loops through nums:<br>
-• Starts a new range if needed.<br>
-• Continues the range if the next number is consecutive.<br>
-• Ends and formats the range if the next number is not consecutive (or at the end of the array). 3. The transformRangeArray helper formats:
-• A single number as "x".<br>
-• A range as "x->y".<br>
+How it works:<br>
+
+1. It tracks the start of each range using a startRange pointer.<br>
+2. It loops through nums: If the current number is not consecutive to the previous, or it’s the end of the array, it ends the current range and adds a formatted string to the result.<br>
+3. The helper formatRange(start, end) returns:<br>
+   • "x" for a single number.<br>
+   • "x->y" for a range of consecutive numbers.<br>
 
 ```javascript
 /**
  * @param {number[]} nums
  * @return {string[]}
  */
-const transformRangeArray = (arr) => {
-  if (arr.length === 1) return arr.toString()
-  return `${arr[0]}->${arr[arr.length - 1]}`
-}
+const formatRange = (start, end) =>
+  start === end ? `${start}` : `${start}->${end}`
+
 var summaryRanges = function (nums) {
-  let rangeArray = []
-  let currentRangeArray = []
+  const n = nums.length
+  const result = []
+  let startRange = 0
 
-  for (let i = 0; i < nums.length; i++) {
-    if (currentRangeArray.length === 0) {
-      currentRangeArray.push(nums[i])
-    }
-    if (i === nums.length - 1 || nums[i] + 1 !== nums[i + 1]) {
-      if (nums[i] !== currentRangeArray[currentRangeArray.length - 1]) {
-        currentRangeArray.push(nums[i])
+  for (let i = 1; i <= n; i++) {
+    if (i === n || nums[i] !== nums[i - 1] + 1) {
+      if (i > startRange) {
+        const endRange = i - 1
+        result.push(formatRange(nums[startRange], nums[endRange]))
+        startRange = i
       }
-
-      rangeArray.push(transformRangeArray(currentRangeArray))
-      currentRangeArray = []
     }
   }
-  return rangeArray
+
+  return result
 }
 ```
 
 ### 📝 LeetCode Solution
 
-🔗 [View on LeetCode](https://leetcode.com/problems/summary-ranges/submissions/1718939552)
+🔗 [View on LeetCode](https://leetcode.com/problems/summary-ranges/submissions/1734276065/?envType=problem-list-v2&envId=2mxn884m)
 
 ### 📈 Complexity Analysis
 
