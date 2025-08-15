@@ -57,23 +57,63 @@ var summaryRanges = function (nums) {
   <br>
   <br>
 
-## Solution 2 (Two pointers) TODO
+## Solution 2 (Two pointers) - 🏆 best solution
+
+(Both solutions have the same time and space complexity, but I personally think this one is easier to understand)
+This version uses two pointers: leftPointer marks the start of a range, and rightPointer explores forward to find the end of the consecutive sequence.<br>
+
+How it works: <br>
+
+1. Initialize both pointers at the beginning of the array.
+2. Move `rightPointer` forward as long as the next number is consecutive.
+3. Once the streak ends, add the range from `leftPointer` to `rightPointer` to the result:
+
+   - If both pointers are at the same index, it’s a single number.
+   - Otherwise, it’s a consecutive range.
+
+4. Move `leftPointer` to `rightPointer + 1` and repeat.
 
 ```javascript
+/**
+ * @param {number[]} nums
+ * @return {string[]}
+ */
+var summaryRanges = function (nums) {
+  const n = nums.length
+  const result = []
+  let leftPointer = 0
+  let rightPointer = 0
 
+  while (leftPointer < n) {
+    if (nums[rightPointer] + 1 === nums[rightPointer + 1]) {
+      rightPointer++
+    } else {
+      if (nums[leftPointer] === nums[rightPointer]) {
+        result.push(`${nums[leftPointer]}`)
+      } else {
+        result.push(`${nums[leftPointer]}->${nums[rightPointer]}`)
+      }
+      leftPointer = rightPointer + 1
+      rightPointer = leftPointer
+    }
+  }
+
+  return result
+}
 ```
 
 ### 📝 LeetCode Solution
 
-🔗 [View on LeetCode]()
+🔗 [View on LeetCode](https://leetcode.com/problems/summary-ranges/submissions/1734982490/?envType=problem-list-v2&envId=2mxn884m)
 
 ### 📈 Complexity Analysis
 
 - **Time Complexity:** $ O(n) $ <br>
-  →
+  → Each pointer moves at most n times, scanning the array in a single pass.  
   <br>
 - **Space Complexity:** $O(n)$ <br>
-  →
+  → The result array can contain up to n strings if there are no consecutive elements.  
+  → No additional space is used apart from the output array and a few variables.
 
   <br>
   <br>
